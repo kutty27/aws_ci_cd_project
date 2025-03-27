@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "No dependencies to install."
+  pre_build:
+    commands:
+      - echo "Fetching the WAR file from GitHub..."
+      - curl -L -o ProductManipulation.war https://github.com/kutty27/aws_ci_cd_project/raw/main/ProductManipulation.war
+  build:
+    commands:
+      - echo "Uploading WAR file to S3..."
+      - aws s3 cp MyApp.war s3://webapp-bucket-27-03/
+  post_build:
+    commands:
+      - echo "WAR file uploaded successfully."
