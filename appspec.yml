@@ -10,8 +10,10 @@ hooks:
     - location: install_tomcat.sh
       timeout: 300
       runas: root
+      permissions: +x
 
   AfterInstall:
     - location: deploy.sh
       timeout: 300
       runas: root
+      permissions: +x
