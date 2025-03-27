@@ -6,8 +6,14 @@ sudo yum update -y
 # Install Java 17 (Amazon Corretto)
 sudo yum install java-17-amazon-corretto-devel -y
 
-# Download Apache Tomcat (Linux version)
-wget https://github.com/kutty27/ProductManipulation/blob/main/apache-tomcat-9.0.75-windows-x64.zip
+# Download Apache Tomcat from S3 bucket
+if ! aws s3 cp s3://webapp-bucket-27-03/apache-tomcat-9.0.75-windows-x64.zip apache-tomcat-9.0.75.zip; then
+  echo "ERROR: Failed to download Tomcat from S3" >&2
+  exit 1
+fi
+
+# Extract Tomcat
+sudo unzip apache-tomcat-9.0.75.zip 
 
 # Move Tomcat to /opt directory
 sudo mkdir -p /opt/tomcat
