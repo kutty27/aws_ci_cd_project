@@ -4,6 +4,10 @@ files:
   - source: ProductManipulation.war
     destination: /opt/tomcat/apache-tomcat-9.0.75/webapps/
 hooks:
+  BeforeInstall:
+    - location: scripts/cleanup.sh
+      timeout: 300
+      runas: root
   AfterInstall:
     - location: scripts/restart_tomcat.sh
       timeout: 300
